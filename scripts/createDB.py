@@ -25,7 +25,25 @@
 '''
 
 # here put the import lib
-from scripts.createDB import createDB
+from scripts.knowledgeDB import MyPDFLoader,MyPinecone
+from scripts.config import *
+
+import os
+
+class CreateDB(object):
+    def __init__(self):
+        pass
+    def create(self):
+        fatherpath = "data/"
+        file_list = os.listdir(fatherpath)
+        file_list = [os.path.join(fatherpath,each) for each in file_list]
+        MyPinecone().add_data(file_list)
+
+class UpdateDB(object):
+    def __init__(self):
+        pass
+    def update(self,file_list):
+        MyPinecone().add_data(file_list)
 
 if __name__ == '__main__':
     CreateDB().create()
