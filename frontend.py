@@ -64,11 +64,7 @@ if "user_stamp" not in st.session_state:
     st.session_state['user_stamp'] = user_stamp
 
 if api_key:
-    api_key_raw = "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"
-    if len(api_key) == len(api_key_raw):
-        header['api_key'] = api_key
-    else:
-        header['api_key'] = api_key_raw
+    header['api_key'] = api_key
         
     user_query = get_text()
         
