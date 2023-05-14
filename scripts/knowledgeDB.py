@@ -109,18 +109,7 @@ class MyPinecone(object):
 
 
 if __name__ == '__main__':
-    """
-    loader1 = MyPDFLoader(r"data\Fan2020_Article_AdvancedDataAnalyticsForEnhanc.pdf")
-    loader2 = MyPDFLoader(r"data\building_energy_simulation.pdf")
-    text = []
-    for loader in [loader1,loader2]:
-        text.extend(loader.text)
     
-    #docsearch = Pinecone.from_texts(text,
-    #                                embeddings, index_name = index_name)
-    
-    docsearch = Pinecone.from_existing_index(index_name,embeddings)
-    """
     docsearch = MyPinecone().read()
 
     #query = "What does a typical data driven approcah include?"
