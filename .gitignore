@@ -164,6 +164,8 @@ test.py
 log.json
 PineconeDataInfo.json
 data/
+frontend.py
+backend.py
 frontend_local.py
 backend_local.py
 scripts/config_local.py
