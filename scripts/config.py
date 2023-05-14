@@ -28,37 +28,12 @@
 import os
 
 # device config
-OPENAI_API_KEY = "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" #"填入专属的API key"  
+OPENAI_API_KEY = "" #"填入专属的API key"  
 
 # vector storage config
-PINECONE_API_KEY = "08e28b00-6c98-4c8f-9c2f-40a4280e62ef"
-PINECONE_ENV = "us-west1-gcp-free"
-PINE_CONE_DB_NAME = "ds-hvac"
-
-# init model config
-init_llm = "ChatGLM-6B-int8"
-init_embedding_model = "text2vec-base"
-
-# model config
-embedding_model_dict = {
-    "ernie-tiny": "nghuyong/ernie-3.0-nano-zh",
-    "ernie-base": "nghuyong/ernie-3.0-base-zh",
-    "ernie-medium": "nghuyong/ernie-3.0-medium-zh",
-    "ernie-xbase": "nghuyong/ernie-3.0-xbase-zh",
-    "text2vec-base": "GanymedeNil/text2vec-base-chinese",
-    'simbert-base-chinese': 'WangZeJun/simbert-base-chinese',
-    'paraphrase-multilingual-MiniLM-L12-v2': "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-}
-
-
-llm_model_dict = {
-    "gpt": {
-        "GPT-3.5": "gpt-3.5-turbo",
-    },
-    "vicuna": {
-        "Vicuna-7b": "vicuna-7b-v1.1",
-    }
-}
+PINECONE_API_KEY = ""
+PINECONE_ENV = ""
+PINE_CONE_DB_NAME = ""
 
 
 if __name__ == '__main__':
