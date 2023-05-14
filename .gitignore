@@ -166,3 +166,5 @@ PineconeDataInfo.json
 data/
 frontend_local.py
 scripts/config_local.py
+scripts/config.py
+scripts/local
