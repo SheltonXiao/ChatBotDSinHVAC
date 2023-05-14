@@ -1,10 +1,10 @@
 # ChatBotDSinHVAC
 
-本项目是一个基于个人专业知识库的问答机器人，主要针对暖通空调（HVAC）领域。项目包含个人专业向量知识库的建立及问答两部分，使用 Python 语言编写而成，参考了 [LangChain-ChatGLM-Webui](https://github.com/thomas-yanxin/LangChain-ChatGLM-Webui) ，[langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)，[hugging-llm]()，及 [OpenChatPaper]()。本项目的初衷是为了提升大语言模型在 HVAC 领域的问答回答能力，同时降低本专业从业人员使用大语言模型的门槛。      
+本项目是一个基于个人专业知识库的问答机器人，主要针对暖通空调（HVAC）领域。项目包含个人专业向量知识库的建立及问答两部分，使用 Python 语言编写而成，参考了 [LangChain-ChatGLM-Webui](https://github.com/thomas-yanxin/LangChain-ChatGLM-Webui) ，[langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)，[hugging-llm](https://github.com/datawhalechina/hugging-llm)，及 [OpenChatPaper](https://github.com/liuyixin-louis/OpenChatPaper)。本项目的初衷是为了提升大语言模型在 HVAC 领域的问答回答能力，同时降低本专业从业人员使用大语言模型的门槛。      
 
 ## 问题背景
 
-本项目的问题背景诞生于 2022 年 12 月 ChatGPT 刚刚发布时的专业知识简单测试。根据测试结果及后续分析，虽然 ChatGPT 在 HVAC 领域具有一定的问答能力，但仍然存在普遍的概念回答不准确、知识幻觉的现象。显然，大语言模型训练时并未能获取足够的 HVAC 领域公开数据进行训练。      
+本项目的问题背景诞生于 2022 年 12 月 ChatGPT 刚刚发布时的[专业知识简单测试](https://mp.weixin.qq.com/s/YxXkTFGD5j37AglY6_GaSQ)。根据测试结果及后续分析，虽然 ChatGPT 在 HVAC 领域具有一定的问答能力，但仍然存在普遍的概念回答不准确、知识幻觉的现象。显然，大语言模型训练时并未能获取足够的 HVAC 领域公开数据进行训练。      
 
 初步分析 HVAC 专业的数据特点包括：     
 
@@ -28,7 +28,7 @@
 1. 个人专业向量知识库的建立；
 2. 基于向量知识库的多轮问答。         
 
-目前借助langchain+Pinecone+OpenAI API实现，使用Streamlit构建较为简单的前端。
+目前借助langchain+Pinecone+OpenAI API实现，使用Streamlit构建较为简单的前端（目前参考OpenChatPaper）。
 
 项目的数据流如下图所示：     
 ![](pic/dataflow.png)
