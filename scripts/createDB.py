@@ -25,25 +25,37 @@
 '''
 
 # here put the import lib
-from scripts.knowledgeDB import MyPDFLoader,MyPinecone
+from scripts.knowledgeDB import MyPDFLoader,MyPinecone,MyWeaviate
 from scripts.config import *
 
 import os
 
-class CreateDB(object):
+class AbstractCreateDB(object):
     def __init__(self):
+        self.fatherpath = "data/"
         pass
-    def create(self):
-        fatherpath = "data/"
-        file_list = os.listdir(fatherpath)
-        file_list = [os.path.join(fatherpath,each) for each in file_list]
-        MyPinecone().add_data(file_list)
-
+    def create(self,file_list=[]):
+        if len(file_list)==0:
+            file_list = os.listdir(self.fatherpath)
+            self.file_list = [os.path.join(self.fatherpath,each) for each in file_list if each.split(".")[1] == "pdf"]
+        self.file_list = file_list
 class UpdateDB(object):
     def __init__(self):
         pass
-    def update(self,file_list):
-        MyPinecone().add_data(file_list)
+    def update(self,file_list,namespace=None):
+        MyPinecone().add_data(file_list, namespace=namespace)
+    def update_doc(self,documents_list,namespace=None):
+        MyPinecone().add_documents(documents_list,namespace=namespace)
+
+class CreateDBPinecone(AbstractCreateDB):
+    def create(self,file_list=[]):
+        super().create(file_list)
+        MyPinecone().add_data(self.file_list)
+
+class CreateDBWeaviate(AbstractCreateDB):
+    def create(self,file_list=[]):
+        super().create(file_list)
+        MyWeaviate().add_data(self.file_list)
 
 if __name__ == '__main__':
-    CreateDB().create()
+    AbstractCreateDB().create()

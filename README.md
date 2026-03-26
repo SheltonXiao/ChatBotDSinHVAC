@@ -1,60 +1,152 @@
-# ChatBotDSinHVAC
+# 🤖 ChatBotDSinHVAC: Domain-Specific Knowledge Base QA Bot for HVAC
 
-本项目是一个基于个人专业知识库的问答机器人，主要针对暖通空调（HVAC）领域。项目包含个人专业向量知识库的建立及问答两部分，使用 Python 语言编写而成，参考了 [LangChain-ChatGLM-Webui](https://github.com/thomas-yanxin/LangChain-ChatGLM-Webui) ，[langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)，[hugging-llm](https://github.com/datawhalechina/hugging-llm)，及 [OpenChatPaper](https://github.com/liuyixin-louis/OpenChatPaper)。本项目的初衷是为了提升大语言模型在 HVAC 领域的问答回答能力，同时降低本专业从业人员使用大语言模型的门槛。      
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.7+-blue.svg" />
+  <img alt="LangChain" src="https://img.shields.io/badge/LangChain-Integration-blue" />
+  <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white" />
+  <img alt="OpenAI API" src="https://img.shields.io/badge/OpenAI_API-Integration-412991?logo=openai&logoColor=white" />
+  <img alt="Pinecone" src="https://img.shields.io/badge/Pinecone-Vector_DB-black" />
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green" />
+</p>
 
-## 问题背景
+<p align="center">
+  <strong>English</strong> | <a href="README_zh.md">中文</a>
+</p>
 
-本项目的问题背景诞生于 2022 年 12 月 ChatGPT 刚刚发布时的[专业知识简单测试](https://mp.weixin.qq.com/s/YxXkTFGD5j37AglY6_GaSQ)。根据测试结果及后续分析，虽然 ChatGPT 在 HVAC 领域具有一定的问答能力，但仍然存在普遍的概念回答不准确、知识幻觉的现象。显然，大语言模型训练时并未能获取足够的 HVAC 领域公开数据进行训练。      
+---
 
-初步分析 HVAC 专业的数据特点包括：     
+> **Note:** This is a personal project developed in 2023 for exploring the application of Large Language Models (LLMs) in the domain of Heating, Ventilation, and Air Conditioning (HVAC).
 
-- HVAC 专业作为地产行业及能源行业的交叉学科，数据隐私性较高，数据需经过脱敏处理才可公开，公开数据较少；
-- HVAC 专业从业人员规模相对较小，知识信息化水平相对较低，公开网络上信息分散且良莠不齐，优质信息获取成本较高。     
+## 📑 Table of Contents
+- [Introduction](#-introduction)
+- [Background & Motivation](#-background--motivation)
+- [Project Goals](#-project-goals)
+- [Tech Stack](#-tech-stack)
+- [Architecture & Features](#-architecture--features)
+- [Project Structure](#-project-structure)
+- [Installation & Quick Start](#-installation--quick-start)
+- [Usage & Demo](#-usage--demo)
+- [Future Work](#-future-work)
+- [Acknowledgements](#-acknowledgements)
 
-因此，为使大语言模型更好地应用于 HVAC 垂直领域，本项目尝试从科研视角入手，使用向量数据库更新及扩充大语言模型的暖通空调基础知识。项目实践中，以本人专业 HVAC 作为背景，结合个人知识背景建立了一个初步向量知识库。
+### 🌟 Introduction
+**ChatBotDSinHVAC** is a specialized Question-Answering (QA) chatbot tailored for the HVAC domain. Built with Python and powered by a custom domain-specific vector knowledge base, this project was developed to bridge the gap between Large Language Models (LLMs) and specialized engineering disciplines.
 
-## 项目目标
-本项目预期实现一个HVAC专业学生/入门科研者可用的针对领域学科基础概念的对话模型，模型支持多轮对话，根据上下文问答。    
+### ❓ Background & Motivation
+This project was initiated shortly after the release of ChatGPT in December 2022. Early [domain-specific tests](https://mp.weixin.qq.com/s/YxXkTFGD5j37AglY6_GaSQ) revealed that while ChatGPT showed promise in HVAC topics, it frequently suffered from factual inaccuracies and "AI hallucinations." This highlighted a clear issue: LLMs lacked sufficient training on specialized, publicly unavailable HVAC data.
 
-相对于基础的大模型，其改进目标为：
-- 减少问答中的 HVAC 知识幻觉；
-- 增强大语言模型回答 HVAC 相关知识的能力；
-- 一定程度上降低使用对话模型的门槛。
+The HVAC domain presents unique data challenges:
+- **Data Privacy:** As an intersection of real estate and energy sectors, much of the data is highly sensitive, requires anonymization, and is rarely open-source.
+- **Fragmented Knowledge:** The professional community is relatively niche, and high-quality, reliable domain knowledge is scattered and difficult to obtain online.
 
-## 项目介绍
+To address this, this project explores a Research & Development (R&D) approach: utilizing a Vector Database (Pinecone) via LangChain to continuously update and expand the LLM’s foundational HVAC knowledge.
 
-本项目实现的功能包含两大部分：
+### 🎯 Project Goals
+The main objective is to provide a reliable, multi-turn conversational model for HVAC students, researchers, and entry-level professionals.
 
-1. 个人专业向量知识库的建立；
-2. 基于向量知识库的多轮问答。         
+Compared to raw foundational models, **ChatBotDSinHVAC** aims to:
+- **Reduce AI hallucinations** when answering HVAC-specific questions.
+- **Enhance the accuracy and depth** of domain-specific knowledge retrieval.
+- **Lower the barrier of entry** for HVAC practitioners looking to leverage AI in their workflows.
 
-目前借助langchain+Pinecone+OpenAI API实现，使用Streamlit构建较为简单的前端（目前参考OpenChatPaper）。
+### 💻 Tech Stack
+- **Language:** Python 3.7+
+- **LLM Framework:** [LangChain](https://github.com/hwchase17/langchain)
+- **Vector Database:** [Pinecone](https://www.pinecone.io/)
+- **Core Model:** OpenAI API
+- **Frontend UI:** [Streamlit](https://streamlit.io/)
+- **Backend Server:** [Flask](https://flask.palletsprojects.com/)
 
-项目的数据流如下图所示：     
-![](pic/dataflow.png)
+### 🛠️ Architecture & Features
+The system leverages the tech stack mentioned above.
 
-对应到两个具体功能上，实现方式分别为：   
-1. 读取多个不同主题的文件，对每一个文件，进行文本切割、拼接分片、嵌入、存入向量数据库；当知识需要增加时，只需读取新的文件，执行上述操作更新数据库即可。
-2. 获取用户问题，在向量数据库中进行相似匹配检索，返回指定数量的结果；将结果结合问题及对话历史生成prompt，调用大语言模型生成回答。
+It consists of two primary modules:
+1. **Vector Knowledge Base Construction:** 
+   - Reads domain-specific documents across various topics.
+   - Performs text splitting, chunking, embedding, and storage into the vector database.
+   - Easily updatable by processing new documents.
+2. **Retrieval-Augmented Generation (RAG) QA:**
+   - Takes user queries and performs similarity matching within the vector database.
+   - Returns the most relevant results and combines them with the chat history to construct a comprehensive prompt.
+   - Calls the LLM to generate an accurate, context-aware answer.
 
+**Data Flow Architecture:**
 
-## 使用
+![Data Flow](pic/dataflow.png)
 
-目前，有基于本地服务器的在线运行版本（demo不常开，可联系我）：[在线运行](http://chatbotdshvac.natapp1.cc)
+### 📁 Project Structure
+```text
+ChatBotDSinHVAC/
+├── pic/                        # Images used in README and frontend
+├── scripts/                    # Utility scripts
+├── utils/                      # Helper modules
+├── frontend.py                 # Streamlit web frontend script (Legacy)
+├── backend.py                  # Core backend logic (RAG query, LLM calling) (Legacy)
+├── baseclass.py                # Base definitions and data structures
+├── createDB.py                 # Core script to create/update vector database
+├── logWriter.py                # Logging utility
+├── requirements.txt            # Minimal dependencies list
+└── README.md                   # Project documentation
+```
 
-已在部分例子中初步实现了对原语言模型的HVAC领域优化。如：
-- 本项目当前版本的回答：
-![](pic/example.png)
-- ChatGPT的回答：错误的回答
-![](pic/gptexample.png)
+### 💻 Installation & Usage
 
-## 后续工作
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/SheltonXiao/ChatBotDSinHVAC.git
+   cd ChatBotDSinHVAC
+   ```
 
-- 提升多轮对话能力；
-- 扩充知识库；
-- 增加开源大语言模型；
-- 前端界面优化；
-- ...
+2. **Configure Environment:**
+   Make sure you have **Python 3.7+** installed. Install the required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+3. **Initialize Personal Vector Database:**
+   If you wish to build your own customized knowledge base:
+   - Configure your API keys for **OpenAI** and **Pinecone**.
+   - Manually create a `data/` directory in the project root.
+   - Place your anonymized, domain-specific documents inside the `data/` folder.
+   - Run the construction script:
+   ```bash
+   python createDB.py
+   ```
 
-本项目未涉及模型微调，仅为基于向量知识库问答的简单尝试。如需进一步提升效果，可考虑微调模型。
+4. **Run the QA Application (Legacy Frontend/Backend):**
+   > *Note: The frontend and backend scripts (`frontend.py`, `backend.py`) were part of the original repository but are no longer actively synced or updated. They remain for reference and local testing.*
+   
+   First, start the Flask backend server:
+   ```bash
+   python backend.py
+   ```
+   
+   Then, in a new terminal, start the Streamlit frontend:
+   ```bash
+   streamlit run frontend.py
+   ```
+
+### 🚀 Usage & Demo
+Access the live demonstration running on a local server *(Note: The demo may not be online 24/7. Feel free to contact the author for access)*: [Live Demo](http://chatbotdshvac.natapp1.cc)
+
+**Performance Comparison:**
+The system successfully mitigates hallucination issues seen in standard LLMs:
+- **ChatBotDSinHVAC Answer (Accurate & Contextual):**
+  ![Example](pic/example.png)
+- **Standard ChatGPT Answer (Inaccurate summary missing domain context):**
+  ![GPT Example](pic/gptexample.png)
+
+### 🔮 Future Work
+- Enhance multi-turn conversation memory and contextual understanding.
+- Continuously expand the domain-specific knowledge base.
+- Integrate open-source LLMs (e.g., Llama, ChatGLM) for localized, privacy-first deployment.
+- Optimize the Streamlit frontend UI/UX.
+
+*(Note: This 2023 project is a proof-of-concept RAG implementation. Further accuracy improvements could be achieved through model fine-tuning.)*
+
+### 🙏 Acknowledgements
+The development of this project was inspired by and references the following excellent open-source works:
+- [LangChain-ChatGLM-Webui](https://github.com/thomas-yanxin/LangChain-ChatGLM-Webui)
+- [langchain-ChatGLM](https://github.com/imClumsyPanda/langchain-ChatGLM)
+- [hugging-llm](https://github.com/datawhalechina/hugging-llm)
+- [OpenChatPaper](https://github.com/liuyixin-louis/OpenChatPaper)

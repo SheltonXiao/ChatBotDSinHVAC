@@ -25,7 +25,16 @@
 '''
 
 # here put the import lib
-from scripts.createDB import createDB
+from scripts.createDB import CreateDBPinecone,UpdateDB,CreateDBWeaviate
+import os
 
 if __name__ == '__main__':
-    CreateDB().create()
+    #CreateDB().create()
+
+    #fatherpath = "data/new/"
+    #file_list = os.listdir(fatherpath)
+    #file_list = [os.path.join(fatherpath,each) for each in file_list]
+    file_list = [r"E:\Document\github\ChatBotDSinHVAC\data\高效机房.txt"]
+    UpdateDB().update(file_list)
+
+    #CreateDBWeaviate().create(file_list)

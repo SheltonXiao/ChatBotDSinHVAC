@@ -35,13 +35,15 @@ class ChatBot(object):
         self.docsearch = self.database.read()
 
     def chat(self,query):
-        docs = self.docsearch.similarity_search(query, include_metadata = True, k = 5)
+        docs = self.docsearch.similarity_search(query,  k = 5, )#include_metadata = True,)
         print("done with search")
         return self.chatbase.respond(input = query,docs=docs)
+    def clear_memory(self):
+        self.chatbase.clear_memory()
 
 class OpenAIChatBot(ChatBot):
-    def __init__(self,api_key):
-        self.chatbase = OpenAIChat(api_key)
+    def __init__(self,model_name,api_key,base_url="https://api.chatanywhere.com.cn/v1"):
+        self.chatbase = OpenAIChat(model_name,api_key,base_url=base_url)
         self.database = MyPinecone()
         self.docsearch = self.database.read()
 

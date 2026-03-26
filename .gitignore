@@ -163,6 +163,7 @@ cython_debug/
 test.py
 log.json
 PineconeDataInfo.json
+WeaviateDataInfo.json
 data/
 frontend.py
 backend.py
@@ -172,3 +173,5 @@ scripts/config_local.py
 scripts/config.py
 scripts/local
 pic/dataflow.excalidraw
+chatbot_base_requirements.txt
+.VSCodeCounter/
